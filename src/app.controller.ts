@@ -7,77 +7,42 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { AppService } from './app.service';
 import { CreateUserDTO } from './dto';
-
-const USERS: CreateUserDTO[] = [
-  {
-    id: 1,
-    name: 'sawata1',
-    age: 21,
-  },
-  {
-    id: 2,
-    name: 'sawata2',
-    age: 22,
-  },
-];
+import { UserService } from './app.service';
 
 @Controller('/users')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-  @Post('/')
-  createUser(@Body() createUserDto: CreateUserDTO) {
-    USERS.push(createUserDto);
+  constructor(private readonly userService: UserService) {}
 
-    return {
-      message: 'User added',
-      user: USERS,
-    };
+  @Post('/')
+  async createUser(@Body() dto: CreateUserDTO) {
+    const user = await this.userService.createUser(dto);
+    return { message: 'User created', user };
   }
 
   @Get('/')
-  getAllUsers() {
-    return USERS;
+  async getAllUsers() {
+    return this.userService.getUsers();
   }
 
-  @Get(':id')
-  getUser(@Param('id') id: string) {
-    const numericId = Number(id);
-    const user = USERS.find((user) => user.id === numericId);
-
-    return {
-      data: user,
-    };
+  @Get('/:id')
+  async getUser(@Param('id') id: string) {
+    const user = await this.userService.getUserById(id);
+    if (!user) return { message: 'User not found' };
+    return { data: user };
   }
 
-  @Put(':id')
-  updateUser(@Param('id') id: string, @Body() updateDto: CreateUserDTO) {
-    const numericId = Number(id);
-
-    const user = USERS.find((user) => user.id === numericId);
-
-    if (!user) {
-      return { message: 'User not found' };
-    }
-
-    Object.assign(user, updateDto);
-
-    return {
-      message: 'User updated',
-      user,
-    };
+  @Put('/:id')
+  async updateUser(@Param('id') id: string, @Body() dto: CreateUserDTO) {
+    const user = await this.userService.updateUser(id, dto);
+    if (!user) return { message: 'User not found' };
+    return { message: 'User updated', user };
   }
 
-  @Delete(':id')
-  deleteUser(@Param('id') id: string) {
-    const numericId = Number(id);
-
-    const user = USERS.filter((user) => user.id !== numericId);
-
-    return {
-      message: 'User Deleted',
-      user,
-    };
+  @Delete('/:id')
+  async deleteUser(@Param('id') id: string) {
+    const user = await this.userService.deleteUser(id);
+    if (!user) return { message: 'User not found' };
+    return { message: 'User deleted', user };
   }
 }
