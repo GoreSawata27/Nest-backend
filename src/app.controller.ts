@@ -1,32 +1,83 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Param,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { AppService } from './app.service';
+import { CreateUserDTO } from './dto';
+
+const USERS: CreateUserDTO[] = [
+  {
+    id: 1,
+    name: 'sawata1',
+    age: 21,
+  },
+  {
+    id: 2,
+    name: 'sawata2',
+    age: 22,
+  },
+];
 
 @Controller('/users')
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
-  // params
-  @Get(':id')
-  getParam(@Param() param: { id: string }) {
-    console.log(param.id, 'Param ID');
-    return 'Success';
-  }
-
-  // query
-  @Get('/')
-  getQuery(@Query() query: any) {
-    console.log(query, 'Query');
-    return 'Success';
-  }
-
-  // parsing body
   @Post('/')
-  creteUser(@Body() { id, name }: { id: number; name: string }) {
-    console.log(id, 'id');
-    console.log(name, 'name');
+  createUser(@Body() createUserDto: CreateUserDTO) {
+    USERS.push(createUserDto);
+
     return {
-      id,
-      name,
+      message: 'User added',
+      user: USERS,
+    };
+  }
+
+  @Get('/')
+  getAllUsers() {
+    return USERS;
+  }
+
+  @Get(':id')
+  getUser(@Param('id') id: string) {
+    const numericId = Number(id);
+    const user = USERS.find((user) => user.id === numericId);
+
+    return {
+      data: user,
+    };
+  }
+
+  @Put(':id')
+  updateUser(@Param('id') id: string, @Body() updateDto: CreateUserDTO) {
+    const numericId = Number(id);
+
+    const user = USERS.find((user) => user.id === numericId);
+
+    if (!user) {
+      return { message: 'User not found' };
+    }
+
+    Object.assign(user, updateDto);
+
+    return {
+      message: 'User updated',
+      user,
+    };
+  }
+
+  @Delete(':id')
+  deleteUser(@Param('id') id: string) {
+    const numericId = Number(id);
+
+    const user = USERS.filter((user) => user.id !== numericId);
+
+    return {
+      message: 'User Deleted',
+      user,
     };
   }
 }
