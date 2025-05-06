@@ -8,10 +8,10 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CreateUserDTO } from './dto';
-import { UserService } from './app.service';
+import { UserService } from './user.service';
 
 @Controller('/users')
-export class AppController {
+export class userController {
   constructor(private readonly userService: UserService) {}
 
   @Post('/')
