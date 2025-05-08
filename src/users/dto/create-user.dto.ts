@@ -1,6 +1,11 @@
 // DTO -> data transfer object
 
+import { IsNumber, IsString } from 'class-validator';
+
 export class CreateUserDTO {
-  readonly name: string;
-  readonly age: number;
+  @IsString()
+  name: string;
+
+  @IsNumber()
+  age: number;
 }
