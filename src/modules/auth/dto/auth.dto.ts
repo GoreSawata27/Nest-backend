@@ -15,3 +15,11 @@ export class signupDTO {
   })
   password: string;
 }
+export class loginDTO {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  @MinLength(8)
+  password: string;
+}
