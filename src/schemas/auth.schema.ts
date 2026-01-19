@@ -11,6 +11,9 @@ export class Auth extends Document {
 
   @Prop({ required: true })
   password: string;
+
+  @Prop({ required: true, default: 'user' })
+  role: string;
 }
 
 export const AuthSchema = SchemaFactory.createForClass(Auth);

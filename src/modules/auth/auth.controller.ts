@@ -1,14 +1,20 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { signupDTO } from './dto/auth.dto';
+import { loginDTO, signupDTO } from './dto/auth.dto';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
-  @Post('/')
+  @Post('/signup')
   async signup(@Body() payload: signupDTO) {
-    const user = this.authService.signup(payload);
-    return { message: 'User created ', user };
+    const user = await this.authService.signup(payload);
+    return { message: 'User created successfully', user };
+  }
+
+  @Post('/signin')
+  async login(@Body() payload: loginDTO) {
+    const user = await this.authService.signin(payload);
+    return { message: 'Logged in successfully', user };
   }
 }

@@ -1,24 +1,23 @@
 import {
   Body,
   Controller,
-  Post,
   Get,
   Param,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDTO } from './dto';
 import { UserService } from './user.service';
+import { Roles } from './roles.decorator';
+import { AuthGuard } from '../auth/auth.guard';
+import { RolesGuard } from './roles.guard';
 
+@UseGuards(AuthGuard, RolesGuard)
+@Roles('admin')
 @Controller('/users')
 export class userController {
   constructor(private readonly userService: UserService) {}
-
-  @Post('/')
-  async createUser(@Body() dto: CreateUserDTO) {
-    const user = await this.userService.createUser(dto);
-    return { message: 'User created', user };
-  }
 
   @Get('/')
   async getAllUsers() {
