@@ -14,6 +14,35 @@ db.users.insertOne({
 });
 ```
 
+## Insert Many
+
+```js
+db.users.insertMany(
+  [
+    {
+      name: 'wick',
+      age: 33,
+      skills: ['one', 'two'],
+    },
+    {
+      name: 'john',
+      age: 28,
+      skills: ['three'],
+    },
+    {
+      name: 'doe',
+      age: 40,
+      skills: ['four', 'five'],
+    },
+  ],
+  { ordered: false },
+  // MongoDB continues inserting even if one document fails
+  // Without it, insert stops at the first error
+
+Without it, insert stops at the first error
+);
+```
+
 ---
 
 ## Find
@@ -40,6 +69,12 @@ db.users.findOne({ name: 'wick' });
 
 ```js
 db.users.find({ 'cardDetails.panCard': true });
+```
+
+### Find & send required fields
+
+```js
+db.users.find({}, { name: 1, _id: 0 });
 ```
 
 ---
