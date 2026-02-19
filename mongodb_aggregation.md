@@ -124,3 +124,30 @@ db.users.aggregate([{ $match: { skills: 'React' } }]);
 or;
 db.users.aggregate([{ $match: { skills: { $in: ['React'] } } }]);
 ```
+
+# Count completed projects per user
+
+```js
+db.users.aggregate([
+  { $unwind: '$projects' },
+  { $match: { 'projects.completed': true } },
+  {
+    $group: {
+      _id: '$name',
+      completedProjectsCount: { $sum: 1 },
+    },
+  },
+]);
+```
+
+# Get users with missing email OR missing age
+
+```js
+db.users.aggregate([
+  {
+    $match: {
+      $or: [{ email: null }, { age: null }],
+    },
+  },
+]);
+```
