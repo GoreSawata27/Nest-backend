@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Sawata",
+    "age": 25,
+    "email": "sawata@gmail.com",
+    "isActive": true,
+    "skills": ["React", "Node"],
+    "address": { "city": "Pune", "pincode": 411001 },
+    "salary": 10000,
+    "projects": [{ "title": "CRM", "completed": true }],
+    "managerId": null
+  },
+  {
+    "name": "Rahul",
+    "age": 30,
+    "email": null,
+    "isActive": false,
+    "skills": ["Angular"],
+    "address": { "city": "Mumbai", "pincode": 400001 },
+    "salary": 70000,
+    "projects": [{ "title": "ERP", "completed": false }],
+    "managerId": 1
+  },
+  {
+    "name": "Priya",
+    "age": 28,
+    "email": "priya@gmail.com",
+    "isActive": true,
+    "skills": [],
+    "address": { "city": "Delhi", "pincode": 110001 },
+    "salary": 65000,
+    "projects": [],
+    "managerId": 1
+  },
+  {
+    "name": "Amit",
+    "age": null,
+    "email": "amit@gmail.com",
+    "isActive": true,
+    "skills": ["Vue", "Node"],
+    "address": null,
+    "salary": 45000,
+    "projects": [{ "title": "MobileApp", "completed": true }],
+    "managerId": 2
+  },
+  {
+    "name": "Sneha",
+    "age": 35,
+    "email": "sneha@gmail.com",
+    "isActive": false,
+    "skills": ["Java"],
+    "address": { "city": "Pune", "pincode": 411002 },
+    "salary": 90000,
+    "projects": [{ "title": "Banking", "completed": true }],
+    "managerId": null
+  },
+  {
+    "name": "Kiran",
+    "age": 22,
+    "email": "kiran@gmail.com",
+    "isActive": true,
+    "skills": ["React"],
+    "address": { "city": "Nagpur", "pincode": 440001 },
+    "salary": 30000,
+    "projects": [{ "title": "Website", "completed": false }],
+    "managerId": 5
+  },
+  {
+    "name": "Neha",
+    "age": 27,
+    "email": null,
+    "isActive": true,
+    "skills": ["Node", "Mongo"],
+    "address": { "city": "Mumbai", "pincode": 400002 },
+    "salary": 60000,
+    "projects": [],
+    "managerId": 2
+  },
+  {
+    "name": "Rohit",
+    "age": 31,
+    "email": "rohit@gmail.com",
+    "isActive": false,
+    "skills": ["Python"],
+    "address": { "city": "Bangalore", "pincode": 560001 },
+    "salary": 80000,
+    "projects": [{ "title": "AI", "completed": false }],
+    "managerId": 1
+  },
+  {
+    "name": "Pooja",
+    "age": 26,
+    "email": "pooja@gmail.com",
+    "isActive": true,
+    "skills": ["React", "Mongo"],
+    "address": { "city": "Pune", "pincode": 411003 },
+    "salary": 55000,
+    "projects": [{ "title": "Dashboard", "completed": true }],
+    "managerId": 5
+  },
+  {
+    "name": "Vikas",
+    "age": 29,
+    "email": "vikas@gmail.com",
+    "isActive": true,
+    "skills": null,
+    "address": { "city": "Hyderabad", "pincode": 500001 },
+    "salary": 72000,
+    "projects": [{ "title": "API", "completed": true }],
+    "managerId": 2
+  }
+]

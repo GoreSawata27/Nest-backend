@@ -2,6 +2,10 @@
 
 ## Notes
 
+- Aggregation = data processing pipeline
+- You pass documents through stages and each stage transforms data.
+- documents → filter → reshape → join → group → sort → result
+
 - $match → $unwind → $group → $project → $sort → $skip → $limit
 - aggregate() = read + transform , → view data
 - updateOne / updateMany = write + change DB , → change data
@@ -89,4 +93,34 @@ db.users.aggregate([
 // {
 //   adultCount: 9
 // }
+```
+
+# get active user count
+
+```js
+db.users.aggregate([{ $match: { isActive: true } }, { $count: 'ActiveCount' }]);
+
+- output : { ActiveCount: 7 }
+```
+
+# get average salary of users city-wise
+
+```js
+db.users.aggregate([
+  { $match: { address: { $ne: null } } },
+  {
+    $group: {
+      _id: '$address.city',
+      avgSalary: { $avg: '$salary' },
+    },
+  },
+]);
+```
+
+# Find users who have React skill
+
+```js
+db.users.aggregate([{ $match: { skills: 'React' } }]);
+or;
+db.users.aggregate([{ $match: { skills: { $in: ['React'] } } }]);
 ```
